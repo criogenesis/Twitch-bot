@@ -17,7 +17,7 @@ randomdict = {}
 SERVER = "irc.twitch.tv"  # server
 PORT = 6667  # port
 ### Options (Edit this)
-PASS = "oauth:rsxogjf9zuvtqm6q5o7ujxowesw4cn"  # bot password can be found on https://twitchapps.com/tmi/
+PASS = ""  # bot password can be found on https://twitchapps.com/tmi/
 BOT = "twerkrobot"  # Bot's name [NO CAPITALS]
 CHANNEL = "littlesiha"  # Channal name [NO CAPITALS]
 OWNER = "criogenesis"  # Owner's name [NO CAPITALS]
