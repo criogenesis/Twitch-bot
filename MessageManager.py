@@ -15,6 +15,7 @@ class MessageManager():
     def getMessage(self):
         global message
         try:
+            #print(self.line)
             message = (self.line.split(":", 2))[2]
         except:
             message = ""

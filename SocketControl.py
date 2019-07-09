@@ -4,15 +4,19 @@ import socket
 class SocketControl():
     ### Options (Don't edit)
     def __init__(self):
+        #self.CHANNEL = "criogenesis"
         self.SERVER = "irc.twitch.tv"  # server
         self.PORT = 6667  # port
         ### Options (Edit this)
-        self.PASS = ""  # bot password can be found on https://twitchapps.com/tmi/
+        self.PASS = "oauth:uro0as9hkeubzvcgng18nn5e2yhm6d"  
+        # bot password can be found on https://twitchapps.com/tmi/
         self.BOT = "twerkrobot"  # Bot's name [NO CAPITALS]
         self.OWNER = "criogenesis"  # Owner's name [NO CAPITALS]
         self.theSocket = socket.socket()
     
     def prepareSocket(self,CHANNEL):
+        
+        
         self.theSocket.connect((self.SERVER, self.PORT))
         self.theSocket.send(("PASS " + self.PASS + "\r\n").encode())
         self.theSocket.send(("NICK " + self.BOT + "\r\n").encode())
@@ -33,6 +37,7 @@ class SocketControl():
         readBuffer_join = "".encode()
         Loading = True
         bufferSize = 1024
+        
         while Loading:
             readBuffer_join = self.theSocket.recv(bufferSize)
             readBuffer_join = readBuffer_join.decode()

@@ -3,7 +3,8 @@ from Cooldown import Cooldown
 from SongManager import SongList,\
     TurnSongOffAndReturnMessage, TurnSongOnAndReturnMessage, RunSongOn,\
     TurnRandomSongOffAndReturnMessage, RunRandomSongOn, RemoveSong,\
-    TurnRandomSongOnAndReturnMessage, SihaInformation, Listcheck
+    TurnRandomSongOnAndReturnMessage, SihaInformation, Listcheck,\
+    StorePlayedSongs, RouletteOff, RouletteOn, RouletteRun, Current
     
 class Commandexecute():
     
@@ -19,22 +20,26 @@ class Commandexecute():
         self.tbot = "twerkrobot"
         self.tbot2 = "twerkbot"
         self.dancing = "dance"
-        self.boyfriend = "does she have a boyfriend"
         self.commandName = "No Command"
     
     def createCommands(self):
-        self.commands.append(RunSongOn(self.songListObj))
+        
         self.commands.append(TurnSongOffAndReturnMessage(self.songListObj))
         self.commands.append(TurnSongOnAndReturnMessage(self.songListObj))
+        self.commands.append(RunSongOn(self.songListObj))
         self.commands.append(TurnRandomSongOnAndReturnMessage(self.songListObj))
         self.commands.append(TurnRandomSongOffAndReturnMessage(self.songListObj))
         self.commands.append(RunRandomSongOn(self.songListObj))
         self.commands.append(RemoveSong(self.songListObj))
         self.commands.append(Twerk())
-        self.commands.append(Boyfriend())
         self.commands.append(Trigger())
         self.commands.append(ModCommand())
         self.commands.append(Listcheck(self.songListObj))
+        self.commands.append(StorePlayedSongs(self.songListObj))
+        self.commands.append(RouletteOn(self.songListObj))
+        self.commands.append(RouletteRun(self.songListObj))
+        self.commands.append(RouletteOff(self.songListObj))
+        self.commands.append(Current(self.songListObj))
     
     def getMod(self):
         return self.siha.getMod()
@@ -60,28 +65,18 @@ class Twerk(Commandexecute):
     def getReturnMsg(self,msgManager):
         if self.cooldown.processCommandThreeMin(Twerk):
             return ("/me sihaButt I shall shake my posterior for you human *twerkles* sihaButt")
-        
-class Boyfriend(Commandexecute):
     
-    def __init__(self):
-        self.commandName = "does she have a boyfriend"
-    
-    def getReturnMsg(self,msgManager):
-        if self.cooldown.processCommandFive(Boyfriend):
-            return ("/me Yes, Avery has a boyfriend and his name is Sam, his channel is twitch.tv/iamsp00n sihaShark")
-
 class Trigger(Commandexecute):
     
     def __init__(self):
-        self.commandName = ["wtf is this", "dance pls", "make it jingle", "who is sam"]
+        self.commandName = ["wtf is this", "dance pls", "make it jingle"]
         self.triggerListExecute = [
         "This is what we would like to call dancing, " 
         + "it's really fun sihaGood",
         "Please do not tell her to dance, "
-        + "she will dance when she is ready sihaShark sihaREE",
+        + "she will dance when she is ready sihaShark sihaAAA",
         "Avery doesn't feel comfortable twerking on stream. Sorry! However, "
-        + "I am a bot, so I can make twerk for you. sihaShark",
-        "Sam is her boyfriend sihaShark"]
+        + "I am a bot, so I can make twerk for you. sihaShark"]
         
     def isAMatch(self,msgManager):
         for x in self.commandName:
@@ -124,10 +119,9 @@ class ModCommand(Commandexecute):
             if msgManager.getUser() in self.getMod() and x in msgManager.getMessage():
                 return True
     
-     
     def getReturnMsg(self,msgManager):
         for command,trigger in zip(self.commandName,self.modCommandExecute):
-            print(trigger)
+            #print(trigger)
             if command in msgManager.getMessage() and self.cooldown.processCommandFive(command):
                 return (trigger)
                      
