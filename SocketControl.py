@@ -8,7 +8,7 @@ class SocketControl():
         self.SERVER = "irc.twitch.tv"  # server
         self.PORT = 6667  # port
         ### Options (Edit this)
-        self.PASS = "oauth:uro0as9hkeubzvcgng18nn5e2yhm6d"  
+        self.PASS = ""  
         # bot password can be found on https://twitchapps.com/tmi/
         self.BOT = "twerkrobot"  # Bot's name [NO CAPITALS]
         self.OWNER = "criogenesis"  # Owner's name [NO CAPITALS]
